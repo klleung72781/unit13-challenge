@@ -114,6 +114,15 @@ def validate_data(first_name, age, investment_amount, risk_level, intent_request
                 Please ask your parents to reach out instead.
                 """
             )
+        elif age > 64:
+            return build_validation_result(
+                False,
+                "age",
+                """
+                You're near retirement age...
+                it's kinda late to invest for that now, don't you think?
+                """
+            )
 
     if investment_amount is not None:
         investment_amount = parse_float(investment_amount)
@@ -194,7 +203,7 @@ def recommend_portfolio(intent_request):
     # Get the initial investment recommendation
     risk_rec_map = {
         "None": "100% bonds (AGG), 0% equities (SPY)",
-        "Very low": "80% bonds (AGG), 20% equities (SPY)",
+        "Very Low": "80% bonds (AGG), 20% equities (SPY)",
         "Low": "60% bonds (AGG), 40% equities (SPY)",
         "Mid": "40% bonds (AGG), 60% equities (SPY)",
         "High": "20% bonds (AGG), 80% equities (SPY)",
